@@ -1,7 +1,8 @@
-import Link from "next/link"
-import { Plus, X, ArrowLeft } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+// import Link from "next/link"
+// import { Plus, X, ArrowLeft } from "lucide-react"
+// import { Input } from "@/components/ui/input"
+// import { Button } from "@/components/ui/button"
+import InvoiceGeneratorForm from "@/components/invoice-generator-form"
 
 export default function InvoiceGenerator() {
   return (
@@ -16,9 +17,9 @@ export default function InvoiceGenerator() {
           }}
         />
       </div>
-
+      <InvoiceGeneratorForm />
       {/* Header for mobile */}
-      <div className="md:hidden w-full p-4 border-b border-gray-200 flex items-center gap-3 relative z-10">
+      {/* <div className="md:hidden w-full p-4 border-b border-gray-200 flex items-center gap-3 relative z-10">
         <Link href="/" className="text-gray-500 hover:text-gray-700">
           <ArrowLeft size={20} />
         </Link>
@@ -28,10 +29,10 @@ export default function InvoiceGenerator() {
           </div>
           <h1 className="font-semibold">ZECPay Invoice Generator</h1>
         </div>
-      </div>
+      </div> */}
 
       {/* Left side - Form */}
-      <div className="w-full md:w-[450px] p-6 border-r border-gray-200 relative z-10">
+      {/* <div className="w-full md:w-[450px] p-6 border-r border-gray-200 relative z-10">
         <div className="hidden md:flex items-center gap-3 mb-6">
           <Link href="/" className="flex items-center gap-2 text-gray-500 hover:text-gray-700">
             <ArrowLeft size={16} />
@@ -125,10 +126,10 @@ export default function InvoiceGenerator() {
           </Button>
           <span className="text-sm text-gray-500">Your client</span>
         </div>
-      </div>
+      </div> */}
 
       {/* Right side - Invoice Preview */}
-      <div className="flex-1 p-6 flex items-center justify-center">
+      {/* <div className="flex-1 p-6 flex items-center justify-center">
         <div className="bg-white rounded-lg shadow-lg w-full max-w-[650px] p-8 border border-gray-100">
           <div className="flex justify-between mb-8">
             <div>
@@ -222,7 +223,7 @@ export default function InvoiceGenerator() {
 
           <div className="text-center mt-8 text-xs text-gray-400">Powered by ZECPay</div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
