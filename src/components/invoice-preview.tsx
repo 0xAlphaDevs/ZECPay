@@ -21,7 +21,7 @@ export function InvoicePreview({ invoiceData, subtotal, setInvoiceRef }: Invoice
 
   return (
     <div
-      className="fixed w-[650px] h-[800px] overflow-auto bg-white rounded-lg shadow-lg p-8 border border-gray-100"
+      className="my-10 z-10 w-[650px] h-[800px] overflow-auto bg-white rounded-lg shadow-lg p-8 border border-gray-100"
       ref={invoiceRef}
     >
       <div className="flex justify-between mb-8">

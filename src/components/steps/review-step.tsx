@@ -7,8 +7,6 @@ import { Download } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import type { InvoiceMetadata } from "../invoice-generator-form"
-import html2canvas from "html2canvas"
-import jsPDF from "jspdf"
 
 interface ReviewStepProps {
   invoiceMetadata: InvoiceMetadata
@@ -26,7 +24,6 @@ export function ReviewStep({
   invoiceRef,
 }: ReviewStepProps) {
   const [errors, setErrors] = useState<Partial<Record<keyof InvoiceMetadata, string>>>({})
-  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -62,36 +59,8 @@ export function ReviewStep({
 
   const handleDownload = async () => {
     if (!validateForm() || !invoiceRef) return
+    alert("Invoice created successfully! You can now download it.")
 
-    try {
-      setIsGeneratingPdf(true)
-
-      const canvas = await html2canvas(invoiceRef, {
-        scale: 2,
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: "#ffffff",
-      })
-
-      const imgData = canvas.toDataURL("image/png")
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: "a4",
-      })
-
-      const imgWidth = 210
-      const imgHeight = (canvas.height * imgWidth) / canvas.width
-
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight)
-      pdf.save(`invoice-${invoiceMetadata.invoiceNumber}.pdf`)
-
-      setIsGeneratingPdf(false)
-    } catch (error) {
-      console.error("Error generating PDF:", error)
-      setIsGeneratingPdf(false)
-      alert("There was an error generating the PDF. Please try again.")
-    }
   }
 
   return (
@@ -136,24 +105,33 @@ export function ReviewStep({
       </div>
 
       <div className="mt-8 space-y-4">
-        <Button
-          type="button"
-          onClick={handleDownload}
-          disabled={isGeneratingPdf}
-          className="bg-black text-white hover:bg-gray-800 w-full flex items-center justify-center gap-2"
-        >
-          {isGeneratingPdf ? (
-            <>
-              <div className="h-4 w-4 border-2 border-t-white border-white/30 rounded-full animate-spin"></div>
-              Generating PDF...
-            </>
-          ) : (
+        <div className="flex gap-3">
+          <Button
+            type="button"
+            className="bg-black text-white hover:bg-gray-800 flex-1 flex items-center justify-center gap-2"
+            onClick={() => {
+              if (validateForm()) {
+                alert("Invoice created successfully! You can now download it.")
+              }
+            }}
+          >
+            Create Invoice
+          </Button>
+
+          <Button
+            type="button"
+            onClick={handleDownload}
+
+            className="bg-green-600 text-white hover:bg-green-700 flex-1 flex items-center justify-center gap-2"
+          >
+
             <>
               <Download size={16} />
-              Download Invoice
+              Download
             </>
-          )}
-        </Button>
+
+          </Button>
+        </div>
 
         <div className="flex gap-3">
           <Button type="button" variant="outline" onClick={onBack} className="border-gray-300 flex-1">
