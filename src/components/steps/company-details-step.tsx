@@ -84,23 +84,9 @@ export function CompanyDetailsStep({ companyDetails, updateCompanyDetails, onNex
       <h2 className="text-xl font-semibold mb-6">Your company</h2>
 
       <div className="space-y-5">
-        <div className="space-y-1">
-          <label className="text-sm font-medium">Email</label>
-          <Input
-            name="email"
-            value={companyDetails.email}
-            onChange={handleChange}
-            placeholder="e.g. info@acme.inc"
-            className={`border-gray-300 ${errors.email ? "border-red-500" : ""}`}
-          />
-          {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
-          <p className="text-xs text-gray-500 mt-1">
-            We&apos;ll fill the billing details automatically if we find the company.
-          </p>
-        </div>
+
 
         <div className="pt-2">
-          <h3 className="text-sm font-medium text-gray-700 mb-3">Billing details</h3>
 
           <div className="space-y-4">
             <div className="space-y-1">
@@ -141,6 +127,20 @@ export function CompanyDetailsStep({ companyDetails, updateCompanyDetails, onNex
                   <span className="text-sm text-gray-500">Upload logo</span>
                 </div>
               )}
+            </div>
+            <div className="space-y-1">
+              <label className="text-sm font-medium">Email</label>
+              <Input
+                name="email"
+                value={companyDetails.email}
+                onChange={handleChange}
+                placeholder="e.g. info@acme.inc"
+                className={`border-gray-300 ${errors.email ? "border-red-500" : ""}`}
+              />
+              {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
+              <p className="text-xs text-gray-500 mt-1">
+                We&apos;ll fill the billing details automatically if we find the company.
+              </p>
             </div>
 
             <div className="space-y-1">
