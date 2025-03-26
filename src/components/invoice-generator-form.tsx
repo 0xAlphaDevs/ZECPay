@@ -32,6 +32,7 @@ export type ClientDetails = {
   clientState: string
   clientZip: string
   clientCountry: string
+  logo?: string
 }
 
 export type InvoiceItem = {
