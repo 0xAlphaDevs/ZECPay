@@ -2,10 +2,11 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import type { ClientDetails } from "../invoice-generator-form"
+import { Upload } from "lucide-react"
 
 interface ClientDetailsStepProps {
   clientDetails: ClientDetails
@@ -16,6 +17,23 @@ interface ClientDetailsStepProps {
 
 export function ClientDetailsStep({ clientDetails, updateClientDetails, onNext, onBack }: ClientDetailsStepProps) {
   const [errors, setErrors] = useState<Partial<Record<keyof ClientDetails, string>>>({})
+
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const handleLogoClick = () => {
+    fileInputRef.current?.click()
+  }
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        updateClientDetails({ logo: event.target?.result as string })
+      }
+      reader.readAsDataURL(file)
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -72,6 +90,34 @@ export function ClientDetailsStep({ clientDetails, updateClientDetails, onNext, 
             className={`border-gray-300 ${errors.clientName ? "border-red-500" : ""}`}
           />
           {errors.clientName && <p className="text-xs text-red-500 mt-1">{errors.clientName}</p>}
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-sm font-medium">Logo</label>
+          <input type="file" ref={fileInputRef} accept="image/*" className="hidden" onChange={handleLogoChange} />
+          {clientDetails.logo ? (
+            <div className="relative border border-gray-300 rounded-md h-20 flex items-center justify-center overflow-hidden group">
+              <img
+                src={clientDetails.logo || "/placeholder.svg"}
+                alt="Client logo"
+                className="max-h-full max-w-full object-contain"
+              />
+              <div
+                className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                onClick={handleLogoClick}
+              >
+                <span className="text-white text-sm">Change Logo</span>
+              </div>
+            </div>
+          ) : (
+            <div
+              className="border border-gray-300 rounded-md h-20 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50"
+              onClick={handleLogoClick}
+            >
+              <Upload size={20} className="text-gray-400 mb-1" />
+              <span className="text-sm text-gray-500">Upload logo</span>
+            </div>
+          )}
         </div>
 
         <div className="space-y-1">
