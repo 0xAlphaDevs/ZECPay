@@ -2,8 +2,8 @@
 
 ### Features
 
-- Create and send Bitcoin transactions on using NEAR account
-- Provide information about your NEAR account and the associated BTC testnet address, including their balances.
+- Private payments with cross chain settlements.
+- Invoice generator with step-by-step instructions.
 
 ## Table of Contents
 
