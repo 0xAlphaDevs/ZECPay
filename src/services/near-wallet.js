@@ -21,10 +21,10 @@ export class Wallet {
    * @param {string} options.networkId - the network id to connect to
    * @param {string} options.createAccessKeyFor - the contract to create an access key for
    * @example
-   * const wallet = new Wallet({ networkId: 'testnet', createAccessKeyFor: 'contractId' });
+   * const wallet = new Wallet({ networkId: 'mainnet', createAccessKeyFor: 'contractId' });
    * wallet.startUp((signedAccountId) => console.log(signedAccountId));
    */
-  constructor({ networkId = "testnet", createAccessKeyFor = undefined }) {
+  constructor({ networkId = "mainnet", createAccessKeyFor = undefined }) {
     this.createAccessKeyFor = createAccessKeyFor;
     this.networkId = networkId;
   }
@@ -38,7 +38,7 @@ export class Wallet {
     this.selector = setupWalletSelector({
       network: {
         networkId: this.networkId,
-        nodeUrl: "https://rpc.testnet.pagoda.co",
+        nodeUrl: "https://rpc.mainnet.near.org",
       },
       modules: [
         setupMyNearWallet(),
