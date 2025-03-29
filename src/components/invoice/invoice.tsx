@@ -20,13 +20,14 @@ export function Invoice({ invoiceData }: InvoiceProps) {
           <div>
             <div className="text-xs text-gray-500">ISSUED</div>
             <div className="font-medium">
-              {invoiceData.review.issue_date || "3/24/25"}
+              {new Date(invoiceData.review.issue_date).toDateString() ||
+                "x/x/xx"}
             </div>
           </div>
           <div>
             <div className="text-xs text-gray-500">DUE DATE</div>
             <div className="font-medium">
-              {invoiceData.review.due_date || "4/07/25"}
+              {new Date(invoiceData.review.due_date).toDateString() || "x/x/xx"}
             </div>
           </div>
         </div>
