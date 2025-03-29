@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link"
 import { ArrowRight, Shield, Repeat, UserCheck, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import ConnectButton from "@/components/wallet/ConnectButton";
 
 export default function LandingPage() {
   return (
@@ -62,6 +65,7 @@ export default function LandingPage() {
             <Button size="lg" variant="outline" className="border-gray-300">
               Learn More <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
+            <ConnectButton />
           </div>
         </div>
       </section>
