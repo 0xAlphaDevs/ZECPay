@@ -21,7 +21,22 @@
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.0.2",
     "tw-animate-css": "^1.2.4",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "@near-wallet-selector/bitte-wallet": "^8.9.13",
+    "@near-wallet-selector/core": "^8.9.13",
+    "@near-wallet-selector/here-wallet": "^8.9.13",
+    "@near-wallet-selector/meteor-wallet": "^8.9.13",
+    "@near-wallet-selector/modal-ui": "^8.9.13",
+    "@near-wallet-selector/my-near-wallet": "^8.9.13",
+    "@radix-ui/react-alert-dialog": "^1.1.2",
+    "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-select": "^2.1.2",
+    "@radix-ui/react-switch": "^1.1.1",
+    "near-api-js": "^5.0.0",
+    "prop-types": "^15.8.1",
+    "react-hot-toast": "^2.4.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
