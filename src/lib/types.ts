@@ -1,11 +1,10 @@
-export interface Invoice {
+export interface InvoiceType {
   created_at: string;
-  id: string;
   invoice_id: string;
   company: Company;
   client: Client;
   items: Item[];
-  payments: Payment;
+  payment: Payment;
   review: Review;
   paid: boolean;
 }
