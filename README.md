@@ -4,7 +4,7 @@ ZECPay enables private transactions using Zcash shielded technologywhile allowin
 
 ### Features
 
-- **_Private Payment_** : Utilize Zcash shielded transactions to keep your payment details private without exposing on-chain activity.
+- **_Private Payments_** : Utilize Zcash shielded transactions to keep your payment details private without exposing on-chain activity.
 - **_Cross-Chain Settlements_** : Settle payments on your preferred blockchain using Near Intents,enabling seamless cross-chain transactions.
 - **_User-Friendly Workflow_** : Create and share invoices easily, with a simple and intuitive interface.
 
@@ -26,7 +26,7 @@ ZECPay enables private transactions using Zcash shielded technologywhile allowin
 ## Sponsers Tech Stack
 
 - NEAR Intents
-- Zcash
+- Zcash (ZEC)
 
 ## High Level Architecture
 
