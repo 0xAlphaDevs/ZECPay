@@ -12,10 +12,9 @@ ZECPay enables private transactions using Zcash shielded technologywhile allowin
 
 1. [All Links](#links)
 2. [Sponsers Tech Stack](#sponsers-tech-stack)
-3. [High Level Architecture](#high-level-architecture)
-4. [App Demo](#app-demo-screenshots)
-5. [Future Vision](#future-vision)
-6. [Team](#team)
+3. [App Demo](#app-demo-screenshots)
+4. [Future Vision](#future-vision)
+5. [Team](#team)
 
 ## Links
 
@@ -28,15 +27,19 @@ ZECPay enables private transactions using Zcash shielded technologywhile allowin
 - NEAR Intents
 - Zcash (ZEC)
 
-## High Level Architecture
-
-![High Level Architecture](/public/high-level-architecture.png)
-
 ## App Demo Screenshots
 
+**_Landing Page_**
 ![Landing Page](/public/landing-page.png)
+
+**_Invoice Generator_**
 ![Invoice Generator](/public/invoice-generator.png)
+
+**_Invoice Preview_**
 ![Invoice Preview](/public/invoice-preview.png)
+
+**_Pay Invoices using ZEC_**
+![Pay Invoices using ZEC](/public/pay-invoices.png)
 
 ## Future Vision
 
