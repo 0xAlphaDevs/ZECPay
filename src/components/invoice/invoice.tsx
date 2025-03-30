@@ -1,14 +1,61 @@
 "use client";
 
 import { InvoiceType } from "@/lib/types";
+import { QRCodeCanvas } from "qrcode.react";
+import { useEffect, useState } from "react";
 
 interface InvoiceProps {
   invoiceData: InvoiceType;
 }
 
 export function Invoice({ invoiceData }: InvoiceProps) {
+  const [qrValue, setQrValue] = useState<string>("");
+  const [zecAmount, setZecAmount] = useState<string>("");
+  const handlePay = () => {
+    // Handle payment logic here
+    console.log("Pay button clicked");
+  };
+
+  async function getZcashPrice(): Promise<number> {
+    // Fetch Zcash price from CoinGecko API
+    return await fetch(
+      "https://api.coingecko.com/api/v3/simple/price?ids=zcash&vs_currencies=usd"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(`ZEC Price: $${data.zcash.usd}`);
+        return data.zcash.usd;
+      })
+      .catch((error) => {
+        console.error("Error fetching ZEC price:", error);
+        return 0;
+      });
+  }
+
+  async function getQrValue() {
+    const address = "t1Kw7yg9QE9eLLXiKwy1QhSPeYgAJs5Uiqk";
+    const amountInUSD = 1;
+    // convert amount to ZEC
+    const zecPrice: number = await getZcashPrice();
+    if (!zecPrice) {
+      console.error("ZEC price is not available");
+      setQrValue("");
+    }
+    const amountInZEC = amountInUSD / zecPrice;
+    const amount = amountInZEC.toFixed(4); // 8 decimal places for Zcash
+    setZecAmount(amount);
+    const qrValue = `zcash:${address}?amount=${amount}`;
+    console.log(`QR Value: ${qrValue}`);
+    setQrValue(qrValue);
+  }
+
+  useEffect(() => {
+    // Fetch Zcash price when component mounts
+    getQrValue();
+  }, []);
+
   return (
-    <div className="my-10 z-10 w-[650px] h-[800px] overflow-auto bg-white rounded-lg shadow-lg p-8 border border-gray-100">
+    <div className="my-10 z-10 w-[650px] h-[870px] overflow-auto bg-white rounded-lg shadow-lg p-8 border border-gray-100">
       <div className="flex justify-between mb-8">
         <div>
           <div className="text-xs text-gray-500">INVOICE NO</div>
@@ -186,13 +233,31 @@ export function Invoice({ invoiceData }: InvoiceProps) {
           <div className="text-xs text-gray-500 mb-2">INSTRUCTIONS</div>
           <div className="text-sm text-gray-600">
             <div>Network</div>
-            <div className="font-medium">NEAR</div>
+            <div className="font-medium">Zcash</div>
             <div className="mt-2">Wallet</div>
             <div className="font-medium break-all">
               {invoiceData.payment.wallet_address || "Enter wallet address"}
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Add pay now button */}
+      <div className="flex justify-center mt-8">
+        <button
+          onClick={handlePay}
+          className="bg-blue-500 text-white py-2 px-4 rounded-md shadow hover:bg-blue-600"
+        >
+          Pay Now
+        </button>
+      </div>
+
+      {/* Put this in modal : TO DO */}
+
+      <div className="flex flex-col justify-center items-center mt-8">
+        <h2>Paying {zecAmount}ZEC</h2>
+        <p>Scan QR using your Zashi wallet to pay.</p>
+        <QRCodeCanvas value={qrValue} size={200} />
       </div>
 
       <div className="text-center mt-8 text-xs text-gray-400">
