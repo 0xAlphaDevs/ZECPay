@@ -9,7 +9,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-// import ConnectButton from "@/components/wallet/ConnectButton";
 
 export default function LandingPage() {
   return (
@@ -82,10 +81,17 @@ export default function LandingPage() {
                 Create an Invoice <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="border-gray-300">
+
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-gray-300"
+              onClick={() => {
+                document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
+              }}>
               Learn More <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
-            {/* <ConnectButton /> */}
+
           </div>
         </div>
       </section>
@@ -128,8 +134,7 @@ export default function LandingPage() {
                 User-Friendly Workflow
               </h3>
               <p className="text-gray-600">
-                Create invoices easily, pay using Near Wallet, and settle on
-                your desired chain with a simple, intuitive interface.
+                Create and share invoices easily, with a simple and intuitive interface.
               </p>
             </div>
           </div>
@@ -159,11 +164,10 @@ export default function LandingPage() {
                   <span className="text-2xl font-bold">2</span>
                 </div>
                 <h3 className="text-lg font-semibold mb-2">
-                  Pay with Near Wallet
+                  Send Invoice
                 </h3>
                 <p className="text-gray-600">
-                  Connect your Near wallet and make a payment with just a few
-                  clicks.
+                  Copy the invoice link and send it to your clients in single click.
                 </p>
               </div>
 
@@ -175,8 +179,7 @@ export default function LandingPage() {
                   Settle on Any Chain
                 </h3>
                 <p className="text-gray-600">
-                  Choose your preferred blockchain for settlement using Near
-                  Intents.
+                  Receive funds on NEAR & withdraw on any chain using NEAR Intents.
                 </p>
               </div>
             </div>
@@ -220,19 +223,8 @@ export default function LandingPage() {
               </h3>
               <p className="text-gray-600">
                 With Near Intents, you can settle payments on various
-                blockchains including Ethereum, Solana, Polygon, and more. The
+                blockchains including Bitcoin, Ethereum, Base, Solana and more. The
                 cross-chain settlement process is seamless and user-friendly.
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold mb-2">
-                Do I need a Near wallet to use ZECPay?
-              </h3>
-              <p className="text-gray-600">
-                Yes, a Near wallet is required for the payment process. However,
-                you can settle the payment on your preferred blockchain, not
-                just Near.
               </p>
             </div>
 
@@ -261,17 +253,9 @@ export default function LandingPage() {
               <span className="font-semibold">ZECPay</span>
             </div>
 
-            <div className="flex gap-8">
-              <a href="#" className="text-sm text-gray-600 hover:text-gray-900">
-                Terms
-              </a>
-              <a href="#" className="text-sm text-gray-600 hover:text-gray-900">
-                Privacy
-              </a>
-              <a href="#" className="text-sm text-gray-600 hover:text-gray-900">
-                Contact
-              </a>
-            </div>
+            <a href="https://alphadevs.dev" className="text-sm text-gray-600 hover:text-gray-900" target="_blank">
+              @alphadevs.dev
+            </a>
 
             <div className="mt-6 md:mt-0 text-sm text-gray-500">
               © 2025 ZECPay. All rights reserved.
