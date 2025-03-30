@@ -1,93 +1,76 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef } from "react"
-import { Upload } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import type { CompanyDetails } from "../invoice-generator-form"
+import { useState } from "react";
+// import { Upload } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import type { CompanyDetails } from "../invoice-generator-form";
 
 interface CompanyDetailsStepProps {
-  companyDetails: CompanyDetails
-  updateCompanyDetails: (details: Partial<CompanyDetails>) => void
-  onNext: () => void
+  companyDetails: CompanyDetails;
+  updateCompanyDetails: (details: Partial<CompanyDetails>) => void;
+  onNext: () => void;
 }
 
-export function CompanyDetailsStep({ companyDetails, updateCompanyDetails, onNext }: CompanyDetailsStepProps) {
-  const [errors, setErrors] = useState<Partial<Record<keyof CompanyDetails, string>>>({})
-  const fileInputRef = useRef<HTMLInputElement>(null)
+export function CompanyDetailsStep({
+  companyDetails,
+  updateCompanyDetails,
+  onNext,
+}: CompanyDetailsStepProps) {
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof CompanyDetails, string>>
+  >({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    updateCompanyDetails({ [name]: value })
+    const { name, value } = e.target;
+    updateCompanyDetails({ [name]: value });
 
     // Clear error when user types
     if (errors[name as keyof CompanyDetails]) {
       setErrors((prev) => ({
         ...prev,
         [name]: undefined,
-      }))
+      }));
     }
-  }
-
-  const handleLogoClick = () => {
-    fileInputRef.current?.click()
-  }
-
-  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = (event) => {
-        updateCompanyDetails({ logo: event.target?.result as string })
-      }
-      reader.readAsDataURL(file)
-    }
-  }
+  };
 
   const validateForm = () => {
-    const newErrors: Partial<Record<keyof CompanyDetails, string>> = {}
+    const newErrors: Partial<Record<keyof CompanyDetails, string>> = {};
 
     if (!companyDetails.companyName.trim()) {
-      newErrors.companyName = "Company name is required"
+      newErrors.companyName = "Company name is required";
     }
 
     if (!companyDetails.email.trim()) {
-      newErrors.email = "Email is required"
+      newErrors.email = "Email is required";
     } else if (!/^\S+@\S+\.\S+$/.test(companyDetails.email)) {
-      newErrors.email = "Please enter a valid email"
+      newErrors.email = "Please enter a valid email";
     }
 
     if (!companyDetails.address.trim()) {
-      newErrors.address = "Address is required"
+      newErrors.address = "Address is required";
     }
 
-    if (!companyDetails.city.trim()) {
-      newErrors.city = "City is required"
-    }
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (validateForm()) {
-      onNext()
+      onNext();
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       <h2 className="text-xl font-semibold mb-6">Your company</h2>
 
       <div className="space-y-5">
-
-
         <div className="pt-2">
-
           <div className="space-y-4">
             <div className="space-y-1">
               <label className="text-sm font-medium">Company name</label>
@@ -96,12 +79,18 @@ export function CompanyDetailsStep({ companyDetails, updateCompanyDetails, onNex
                 value={companyDetails.companyName}
                 onChange={handleChange}
                 placeholder="Your company name"
-                className={`border-gray-300 ${errors.companyName ? "border-red-500" : ""}`}
+                className={`border-gray-300 ${
+                  errors.companyName ? "border-red-500" : ""
+                }`}
               />
-              {errors.companyName && <p className="text-xs text-red-500 mt-1">{errors.companyName}</p>}
+              {errors.companyName && (
+                <p className="text-xs text-red-500 mt-1">
+                  {errors.companyName}
+                </p>
+              )}
             </div>
 
-            <div className="space-y-1">
+            {/* <div className="space-y-1">
               <label className="text-sm font-medium">Logo</label>
               <input type="file" ref={fileInputRef} accept="image/*" className="hidden" onChange={handleLogoChange} />
               {companyDetails.logo ? (
@@ -127,7 +116,7 @@ export function CompanyDetailsStep({ companyDetails, updateCompanyDetails, onNex
                   <span className="text-sm text-gray-500">Upload logo</span>
                 </div>
               )}
-            </div>
+            </div> */}
             <div className="space-y-1">
               <label className="text-sm font-medium">Email</label>
               <Input
@@ -135,12 +124,13 @@ export function CompanyDetailsStep({ companyDetails, updateCompanyDetails, onNex
                 value={companyDetails.email}
                 onChange={handleChange}
                 placeholder="e.g. info@acme.inc"
-                className={`border-gray-300 ${errors.email ? "border-red-500" : ""}`}
+                className={`border-gray-300 ${
+                  errors.email ? "border-red-500" : ""
+                }`}
               />
-              {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
-              <p className="text-xs text-gray-500 mt-1">
-                We&apos;ll fill the billing details automatically if we find the company.
-              </p>
+              {errors.email && (
+                <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+              )}
             </div>
 
             <div className="space-y-1">
@@ -150,77 +140,27 @@ export function CompanyDetailsStep({ companyDetails, updateCompanyDetails, onNex
                 value={companyDetails.address}
                 onChange={handleChange}
                 placeholder="Street address"
-                className={`border-gray-300 ${errors.address ? "border-red-500" : ""}`}
+                className={`border-gray-300 ${
+                  errors.address ? "border-red-500" : ""
+                }`}
               />
-              {errors.address && <p className="text-xs text-red-500 mt-1">{errors.address}</p>}
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-sm font-medium">City</label>
-              <Input
-                name="city"
-                value={companyDetails.city}
-                onChange={handleChange}
-                placeholder="City"
-                className={`border-gray-300 ${errors.city ? "border-red-500" : ""}`}
-              />
-              {errors.city && <p className="text-xs text-red-500 mt-1">{errors.city}</p>}
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-sm font-medium">State</label>
-              <Input
-                name="state"
-                value={companyDetails.state}
-                onChange={handleChange}
-                placeholder="State/Province"
-                className="border-gray-300"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-sm font-medium">Zip</label>
-              <Input
-                name="zip"
-                value={companyDetails.zip}
-                onChange={handleChange}
-                placeholder="ZIP/Postal code"
-                className="border-gray-300"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-sm font-medium">Country</label>
-              <Input
-                name="country"
-                value={companyDetails.country}
-                onChange={handleChange}
-                placeholder="Country"
-                className="border-gray-300"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-sm font-medium">Tax ID</label>
-              <Input
-                name="taxId"
-                value={companyDetails.taxId}
-                onChange={handleChange}
-                placeholder="Tax ID/VAT number"
-                className="border-gray-300"
-              />
+              {errors.address && (
+                <p className="text-xs text-red-500 mt-1">{errors.address}</p>
+              )}
             </div>
           </div>
         </div>
       </div>
 
       <div className="mt-8 flex items-center justify-between">
-        <Button type="submit" className="bg-black text-white hover:bg-gray-800 flex items-center gap-1">
+        <Button
+          type="submit"
+          className="bg-black text-white hover:bg-gray-800 flex items-center gap-1"
+        >
           Next <span className="ml-1">→</span>
         </Button>
         <span className="text-sm text-gray-500">Step 1 of 5</span>
       </div>
     </form>
-  )
+  );
 }
-

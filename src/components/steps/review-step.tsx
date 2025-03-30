@@ -1,19 +1,18 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Download } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import type { InvoiceMetadata } from "../invoice-generator-form"
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import type { InvoiceData, InvoiceMetadata } from "../invoice-generator-form";
 
 interface ReviewStepProps {
-  invoiceMetadata: InvoiceMetadata
-  updateInvoiceMetadata: (metadata: Partial<InvoiceMetadata>) => void
-  onBack: () => void
-  resetInvoice: () => void
-  invoiceRef: HTMLDivElement | null
+  invoiceMetadata: InvoiceMetadata;
+  updateInvoiceMetadata: (metadata: Partial<InvoiceMetadata>) => void;
+  onBack: () => void;
+  resetInvoice: () => void;
+  invoiceData: InvoiceData;
 }
 
 export function ReviewStep({
@@ -21,51 +20,53 @@ export function ReviewStep({
   updateInvoiceMetadata,
   onBack,
   resetInvoice,
-  invoiceRef,
+  invoiceData,
 }: ReviewStepProps) {
-  const [errors, setErrors] = useState<Partial<Record<keyof InvoiceMetadata, string>>>({})
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof InvoiceMetadata, string>>
+  >({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    updateInvoiceMetadata({ [name]: value })
+    const { name, value } = e.target;
+    updateInvoiceMetadata({ [name]: value });
 
     // Clear error when user types
     if (errors[name as keyof InvoiceMetadata]) {
       setErrors((prev) => ({
         ...prev,
         [name]: undefined,
-      }))
+      }));
     }
-  }
+  };
 
   const validateForm = () => {
-    const newErrors: Partial<Record<keyof InvoiceMetadata, string>> = {}
+    const newErrors: Partial<Record<keyof InvoiceMetadata, string>> = {};
 
     if (!invoiceMetadata.invoiceNumber.trim()) {
-      newErrors.invoiceNumber = "Invoice number is required"
+      newErrors.invoiceNumber = "Invoice number is required";
     }
 
     if (!invoiceMetadata.issueDate.trim()) {
-      newErrors.issueDate = "Issue date is required"
+      newErrors.issueDate = "Issue date is required";
     }
 
     if (!invoiceMetadata.dueDate.trim()) {
-      newErrors.dueDate = "Due date is required"
+      newErrors.dueDate = "Due date is required";
     }
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-  const handleDownload = async () => {
-    if (!validateForm() || !invoiceRef) return
-    alert("Invoice created successfully! You can now download it.")
+  const generateInvoice = () => {
+    // Logic to generate the invoice
 
-  }
+    console.log("Invoice data:", invoiceData);
+  };
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-6">Review & Download</h2>
+      <h2 className="text-xl font-semibold mb-6">Review & Generate Invoice</h2>
 
       <div className="space-y-5">
         <div className="space-y-1">
@@ -74,9 +75,13 @@ export function ReviewStep({
             name="invoiceNumber"
             value={invoiceMetadata.invoiceNumber}
             onChange={handleChange}
-            className={`border-gray-300 ${errors.invoiceNumber ? "border-red-500" : ""}`}
+            className={`border-gray-300 ${
+              errors.invoiceNumber ? "border-red-500" : ""
+            }`}
           />
-          {errors.invoiceNumber && <p className="text-xs text-red-500 mt-1">{errors.invoiceNumber}</p>}
+          {errors.invoiceNumber && (
+            <p className="text-xs text-red-500 mt-1">{errors.invoiceNumber}</p>
+          )}
         </div>
 
         <div className="space-y-1">
@@ -86,9 +91,13 @@ export function ReviewStep({
             name="issueDate"
             value={invoiceMetadata.issueDate}
             onChange={handleChange}
-            className={`border-gray-300 ${errors.issueDate ? "border-red-500" : ""}`}
+            className={`border-gray-300 ${
+              errors.issueDate ? "border-red-500" : ""
+            }`}
           />
-          {errors.issueDate && <p className="text-xs text-red-500 mt-1">{errors.issueDate}</p>}
+          {errors.issueDate && (
+            <p className="text-xs text-red-500 mt-1">{errors.issueDate}</p>
+          )}
         </div>
 
         <div className="space-y-1">
@@ -98,9 +107,13 @@ export function ReviewStep({
             name="dueDate"
             value={invoiceMetadata.dueDate}
             onChange={handleChange}
-            className={`border-gray-300 ${errors.dueDate ? "border-red-500" : ""}`}
+            className={`border-gray-300 ${
+              errors.dueDate ? "border-red-500" : ""
+            }`}
           />
-          {errors.dueDate && <p className="text-xs text-red-500 mt-1">{errors.dueDate}</p>}
+          {errors.dueDate && (
+            <p className="text-xs text-red-500 mt-1">{errors.dueDate}</p>
+          )}
         </div>
       </div>
 
@@ -111,30 +124,34 @@ export function ReviewStep({
             className="bg-black text-white hover:bg-gray-800 flex-1 flex items-center justify-center gap-2"
             onClick={() => {
               if (validateForm()) {
-                alert("Invoice created successfully! You can now download it.")
+                // Generate the invoice
+                generateInvoice();
+                // alert("Invoice created successfully! You can now download it.");
               }
             }}
           >
-            Create Invoice
+            Generate Invoice
           </Button>
 
-          <Button
+          {/* <Button
             type="button"
             onClick={handleDownload}
-
             className="bg-green-600 text-white hover:bg-green-700 flex-1 flex items-center justify-center gap-2"
           >
-
             <>
               <Download size={16} />
               Download
             </>
-
-          </Button>
+          </Button> */}
         </div>
 
         <div className="flex gap-3">
-          <Button type="button" variant="outline" onClick={onBack} className="border-gray-300 flex-1">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onBack}
+            className="border-gray-300 flex-1"
+          >
             ← Back
           </Button>
           <Button
@@ -148,10 +165,10 @@ export function ReviewStep({
         </div>
 
         <p className="text-xs text-gray-500 text-center">
-          Your invoice data is saved locally. You can come back anytime to continue.
+          Your invoice data is saved locally. You can come back anytime to
+          continue.
         </p>
       </div>
     </div>
-  )
+  );
 }
-
