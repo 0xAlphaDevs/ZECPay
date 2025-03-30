@@ -20,7 +20,7 @@ ZECPay enables private transactions using Zcash shielded technologywhile allowin
 
 - [Deployed URL](https://zecpay.alphadevs.dev/)
 - [Presentation](https://www.canva.com/design/DAGi5VblSQI/7_rEq_cuHYQ6WtKpTM_ocQ/view)
-- [Demo Video]()
+- [Demo Video](https://youtu.be/jmvtENJWx34)
 
 ## Sponsers Tech Stack
 
@@ -43,7 +43,12 @@ ZECPay enables private transactions using Zcash shielded technologywhile allowin
 
 ## Future Vision
 
--
+- Next Features :
+  We will be adding features like auto detect zcash txns and mark the invoice paid automatically. Develop a dashboard to manage all invoices and client payments seamlessly.
+- Roadmap and MVP :
+  Further we want users to be able auto-convert ZEC and receive stablecoins (or any token) using Near Intents on any chain. Also we want to integrate off-ramp solutions directly into ZECPay.
+- Goal and Vision :
+  Our goal is to establish ZECPay as the go-to platform for creating and managing crypto invoices Provide a seamless, private, and secure payment experience.
 
 ## Team
 
