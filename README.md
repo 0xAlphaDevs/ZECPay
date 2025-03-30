@@ -1,9 +1,12 @@
 ## ZECPay : Private payments with cross chain settlements.
 
+ZECPay enables private transactions using Zcash shielded technologywhile allowing settlements on any blockchain through Near Intents.
+
 ### Features
 
-- Private payments with cross chain settlements.
-- Invoice generator with step-by-step instructions.
+- **_Private Payment_** : Utilize Zcash shielded transactions to keep your payment details private without exposing on-chain activity.
+- **_Cross-Chain Settlements_** : Settle payments on your preferred blockchain using Near Intents,enabling seamless cross-chain transactions.
+- **_User-Friendly Workflow_** : Create and share invoices easily, with a simple and intuitive interface.
 
 ## Table of Contents
 
@@ -16,8 +19,8 @@
 
 ## Links
 
-- [Deployed URL]()
-- [Presentation]()
+- [Deployed URL](https://zecpay.alphadevs.dev/)
+- [Presentation](https://www.canva.com/design/DAGi5VblSQI/7_rEq_cuHYQ6WtKpTM_ocQ/view)
 - [Demo Video]()
 
 ## Sponsers Tech Stack
@@ -31,7 +34,9 @@
 
 ## App Demo Screenshots
 
-![Landing Page]()
+![Landing Page](/public/landing-page.png)
+![Invoice Generator](/public/invoice-generator.png)
+![Invoice Preview](/public/invoice-preview.png)
 
 ## Future Vision
 
