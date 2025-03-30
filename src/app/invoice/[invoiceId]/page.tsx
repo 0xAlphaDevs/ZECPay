@@ -60,57 +60,6 @@ const InvoicePage = () => {
     fetchInvoice();
   }, [invoiceId, supabase]);
 
-  // const saveInvoice = async () => {
-  //   const newInvoiceId = uuidv4();
-  //   const invoiceData: InvoiceType = {
-  //     created_at: new Date().toISOString(),
-  //     invoice_id: newInvoiceId,
-  //     company: {
-  //       name: "Company Name",
-  //       address: "Company Address",
-  //       email: "test@email.com",
-  //     },
-  //     client: {
-  //       name: "Client Name",
-  //       address: "Client Address",
-  //       email: "client@email.com",
-  //     },
-  //     items: [
-  //       {
-  //         description: "Item 1",
-  //         quantity: 2,
-  //         unit_price: 100,
-  //       },
-  //       {
-  //         description: "Item 2",
-  //         quantity: 1,
-  //         unit_price: 200,
-  //       },
-  //     ],
-  //     payment: {
-  //       wallet_address: "0x1234567890abcdef1234567890abcdef12345678",
-  //     },
-  //     review: {
-  //       invoice_number: "123",
-  //       issue_date: new Date().toISOString(),
-  //       due_date: new Date(
-  //         new Date().setDate(new Date().getDate() + 30)
-  //       ).toISOString(),
-  //     },
-  //     paid: false,
-  //   };
-  //   const { data, error } = await supabase
-  //     .from("invoices")
-  //     .insert([invoiceData])
-  //     .select("*");
-
-  //   if (error) {
-  //     console.error("Error saving invoice:", error);
-  //   } else {
-  //     console.log("Invoice saved successfully:", data);
-  //   }
-  // };
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Invoice invoiceData={invoiceData as InvoiceType} />
